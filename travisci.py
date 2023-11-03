@@ -20,10 +20,7 @@ def run(cmd, **kwargs):
 
     # compensate for slow Clojure examples startup:
     # lein trampoline run + clojure.core recompilation
-    if kwargs.get("cwd") == "clojure":
-        x = 4
-    else:
-        x = 1
+    x = 4 if kwargs.get("cwd") == "clojure" else 1
     time.sleep(0.2 * multiplier * x)
     return p.returncode, out + '\n' + err
 
@@ -32,10 +29,7 @@ def spawn(cmd, **kwargs):
                          stdout=subprocess.PIPE,
                          stderr=subprocess.PIPE,
                          **kwargs)
-    if kwargs.get("cwd") == "clojure":
-        x = 4
-    else:
-        x = 1
+    x = 4 if kwargs.get("cwd") == "clojure" else 1
     time.sleep(0.5 * multiplier * x)
     return p
 
